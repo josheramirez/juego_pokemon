@@ -6,6 +6,8 @@
 package Servlet;
 
 import Controlador.Consulta;
+import Modelos.Personaje;
+import Modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -39,27 +41,38 @@ public class Inicio_Sesion extends HttpServlet {
             String Contraseña=request.getParameter("pass");
             
             Consulta con=new Consulta();
+            Consulta con2=new Consulta();
+            Consulta con3=new Consulta();
+            
             if(con.autenticacion(Nombre, Contraseña)){                               
+                //creo sesion
                 HttpSession objsesion=request.getSession(true);
                 objsesion.setAttribute("nombre", Nombre); 
                 objsesion.setAttribute("pass", Contraseña);
                 request.getSession().removeAttribute("error");
-                response.sendRedirect("Confirmation.jsp");
+                Personaje personaje=con2.getPersonaje(Nombre,Contraseña);
+                
+                out.println(personaje.id);
+                
+                if(personaje.id!=0){
+                    objsesion.setAttribute("personaje", personaje); 
+                    //request.setAttribute("personaje", personaje);
+                    response.sendRedirect("Confirmation.jsp");
+                    //request.getRequestDispatcher("Confirmation.jsp").forward(request, response);
+                }else{
+                    Usuario usuario=con3.getUsuario(Nombre,Contraseña);
+                    objsesion.setAttribute("usuario",usuario); 
+                    out.println(usuario.id);
+                    response.sendRedirect("crearPersonaje.jsp");
+                }
+                
             }else{
                HttpSession objsesion=request.getSession(true);
                String mensaje="HAY UN ERROR EN EL INGRESO";
                objsesion.setAttribute("error", mensaje); 
                response.sendRedirect("errorLogin.jsp");
-                
-                //request.setAttribute("error",mensaje);
-                //request.getRequestDispatcher("errorLogin.jsp").forward(request, response);
-            //RequestDispatcher dispatcher = request.getRequestDispatcher("errorLogin.jsp");
-            //dispatcher.forward(request, response);
-            //response.sendRedirect("errorLogin.jsp");
-            //out.println("Los datos ingresados son incorrectos.");
             }
-            //out.println("Los datos ingresados son incorrectos.");
-            //request.getRequestDispatcher("errorLogin.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

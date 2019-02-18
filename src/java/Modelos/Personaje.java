@@ -14,4 +14,15 @@ public class Personaje {
     public String nombre;
     public int nivel;
     public int usuario;
+    public String genero;
+    public String raza;
+    public String equipo;
+    public String color_ojos;
+    public String color_pelo;
+    public String medalla_1;
+    public String medalla_2;
+    public String medalla_3;
+    public String pokemonedas;
+    public String experiencia;
+    
 }

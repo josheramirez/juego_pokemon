@@ -1,18 +1,17 @@
-<%-- 
-    Document   : Confirmation
-    Created on : 25-01-2019, 21:21:31
-    Author     : KATHY
---%>
 
+<%@page import="Modelos.Personaje"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     HttpSession objsesion=request.getSession(false);
-    String Nombre=(String)objsesion.getAttribute("nombre");
-    if (Nombre.equals("")){
-        response.sendRedirect("LogIn.jsp");
-    }
-   out.println(request.getAttribute("personaje"));
+    //String Nombre=(String)objsesion.getAttribute("nombre");
 
+    /*    if (Nombre.equals("")){
+        response.sendRedirect("LogIn.jsp");
+   }
+*/   
+   //Personaje per=(Personaje)request.getAttribute("personaje"); 
+   Personaje per=(Personaje)objsesion.getAttribute("personaje");
+   out.println(per.nombre);
 %>
 <!DOCTYPE html>
 <html>    
@@ -21,10 +20,11 @@
         <title>Home</title>
     </head>
     <body>
+       
         <br><br><br>
         <div align="center">
             <img src="https://fontmeme.com/permalink/190206/cc8bff332df13d63619f061948f54771.png" alt="pokemon-font" border="0"><br><br>
-            <h1><strong style="font-family: Arial, Helvetica, sans-serif; color: #2a75bb; font-size: 40px; text-decoration: none; padding-right: 5px"><%out.println(Nombre);%>.</strong></h1>
+            <h1><strong style="font-family: Arial, Helvetica, sans-serif; color: #2a75bb; font-size: 40px; text-decoration: none; padding-right: 5px"><%out.println(per.nombre);%>.</strong></h1>
             <br>
         </div>
         <div align="center">
