@@ -11,8 +11,6 @@
     if (Nombre.equals("")){
         response.sendRedirect("LogIn.jsp");
     }
-   out.println(request.getAttribute("personaje"));
-
 %>
 <!DOCTYPE html>
 <html>    

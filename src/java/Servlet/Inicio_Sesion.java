@@ -6,7 +6,6 @@
 package Servlet;
 
 import Controlador.Consulta;
-import Modelos.Personaje;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -40,27 +39,12 @@ public class Inicio_Sesion extends HttpServlet {
             String Contraseña=request.getParameter("pass");
             
             Consulta con=new Consulta();
-            Consulta con2=new Consulta();
             if(con.autenticacion(Nombre, Contraseña)){                               
-                //creo sesion
                 HttpSession objsesion=request.getSession(true);
                 objsesion.setAttribute("nombre", Nombre); 
                 objsesion.setAttribute("pass", Contraseña);
                 request.getSession().removeAttribute("error");
-                Personaje personaje=con2.get_db_Personaje(Nombre,Contraseña);
-                
-                if(personaje!=null){
-                    objsesion.setAttribute("personaje", personaje); 
-                    request.setAttribute("personaje", personaje);
-                    
-                    request.getRequestDispatcher("Confirmation.jsp").forward(request, response);
-                }else{
-                }
-                
-                
-                //request.setAttribute("personaje", "hola");
-                //request.getRequestDispatcher("Confirmation.jsp").forward(request, response);
-                //response.sendRedirect("Confirmation.jsp");
+                response.sendRedirect("Confirmation.jsp");
             }else{
                HttpSession objsesion=request.getSession(true);
                String mensaje="HAY UN ERROR EN EL INGRESO";
