@@ -5,7 +5,7 @@
  */
 package Servlet;
 
-import Controlador.Consulta;
+import Controlador.Consultas;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -39,7 +39,7 @@ public class Registro_usuario extends HttpServlet {
         String Email=request.getParameter("email");        
         String Telefono=request.getParameter("telefono");            
         
-            Consulta con = new Consulta();
+            Consultas con = new Consultas();
             if(con.registrar(Nombre, Contraseña, Email, Telefono)){
                 HttpSession objsesion=request.getSession(true);
                 objsesion.setAttribute("nombre", Nombre); 

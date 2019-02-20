@@ -11,13 +11,21 @@ package Modelos;
  */
 public class Pokemon {
     public int id;
-    public String imagen;
+    public int pokedex;
     public String nombre;
-    public String apodo;
-    public String tipo;
+    public int salud;
+    public int ataque;
+    public int defensa;
+    public int ataque_especial;
+    public int defensa_especial;
+    public int velocidad;
+    public int total;
+    public String tipo_1;
+    public String tipo_2;
     public String especie;
-    public String nivel;
-    public String salud;
+    public String apodo;
+    public int nivel;
+    public String imagen;
     public String estado;
     public String idpkmn;
 }

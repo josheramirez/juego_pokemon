@@ -5,7 +5,7 @@
  */
 package Servlet;
 
-import Controlador.Consulta;
+import Controlador.Consultas;
 import Modelos.Personaje;
 import Modelos.Pokemon;
 import Modelos.Usuario;
@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,40 +38,43 @@ public class cargarUsuario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-                        
+        PrintWriter out = response.getWriter();         
         HttpSession HS = request.getSession();
         Usuario usuario =(Usuario)HS.getAttribute("usuario");
-        out.println(usuario.id);
+
+        /*
+        //mocks
+        Usuario usuario=new Usuario();
+        usuario.id=2;
+        usuario.nombre="joshe ramirez";
+        HS.setAttribute("usuario",usuario);
+        //
+        */
+        
+        //out.println(usuario.id);
                 
-            Consulta C = new Consulta();
+           
+            Consultas C = new Consultas();
             
             if(usuario.id==0){
             response.sendRedirect("index.jsp");
             }
-            String character;
-            int i = 1;
-           
-            Personaje personaje=C.cargarPersonaje(usuario.id);
-            //character = RS.getString(1);
-            HS.setAttribute("personaje", personaje); 
             
-            Pokemon pokemon=C.cargarPokemons(usuario.id);
-			 
-			while(RS.next()){
-				if(RS.getBoolean(9)){
-				request.setAttribute("pkmn"+i, RS.getString(1));
-				i++;
-				}
-			}
-			while(i <= 6){
-				request.setAttribute("pkmn"+i,"pic/PKball.png");
-				i++;
-			}
-			request.getRequestDispatcher("perfil.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            System.err.println("Error: "+ex);
-        }
+            Personaje personaje=C.cargarPersonaje(usuario.id);
+            ArrayList<Pokemon> lista_pokemon=C.cargarPokemons(usuario.id);
+          
+            request.setAttribute("personaje", personaje); 
+            request.setAttribute("personaje", personaje); 
+        
+        /*
+        //mock
+        personaje.genero="hombre";
+        //
+        */
+            
+            
+            request.getRequestDispatcher("perfil.jsp").forward(request, response);
+        } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

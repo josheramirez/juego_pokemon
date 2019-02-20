@@ -5,10 +5,6 @@
  */
 package Modelos;
 
-/**
- *
- * @author Hospital
- */
 public class Personaje {
     public int id;
     public String nombre;
@@ -22,7 +18,7 @@ public class Personaje {
     public String medalla_1;
     public String medalla_2;
     public String medalla_3;
-    public String pokemonedas;
-    public String experiencia;
+    public int pokemonedas;
+    public int experiencia;
     
 }

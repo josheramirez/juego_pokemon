@@ -5,7 +5,7 @@
  */
 package Servlet;
 
-import Controlador.Consulta;
+import Controlador.Consultas;
 import Modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +38,10 @@ public class crearPersonaje extends HttpServlet {
                 
                 // capturo los datos enviados desde crearPersonaje.jsp
 
-		int usuario_id = Integer.parseInt(request.getParameter("usuario_id")) ;
+                HttpSession HS = request.getSession();
+                Usuario usuario= (Usuario)HS.getAttribute("usuario");
+                //out.println(usuario.id);
+		int usuario_id =(int)usuario.id;
 		String nombre = request.getParameter("nombre");
                 String Genero = request.getParameter("Genero");
                 String Raza = request.getParameter("Raza");
@@ -46,9 +49,10 @@ public class crearPersonaje extends HttpServlet {
 		String COjos = request.getParameter("COjos");
 		String CPelo = request.getParameter("CPelo");
 
-		Consulta C = new Consulta();
+		Consultas C = new Consultas();
+                
                 // creo al personaje en la bd
-                if(C.crearPersonaje(nombre,usuario_id,Genero,Raza,Equipo,COjos,CPelo)){
+               if(C.crearPersonaje(nombre,usuario_id,Genero,Raza,Equipo,COjos,CPelo)){
                     
                     // redirijo a cargarUsuario
                     response.sendRedirect("cargarUsuario");
@@ -56,6 +60,7 @@ public class crearPersonaje extends HttpServlet {
                 else{
                     response.sendRedirect("crearPersonaje.jsp");
                 }
+                
              
     }
 

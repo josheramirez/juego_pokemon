@@ -6,22 +6,21 @@
 package Servlet;
 
 import Controlador.Consultas;
-import Modelos.Personaje;
-import Modelos.Usuario;
+import Modelos.Pokemon;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author WarPc
+ * @author Hospital
  */
-public class Inicio_Sesion extends HttpServlet {
+public class prueba extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,49 +34,17 @@ public class Inicio_Sesion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         
-            String Nombre=request.getParameter("nombre");
-            String Contraseña=request.getParameter("pass");
-            
-            Consultas con=new Consultas();
-            Consultas con2=new Consultas();
-            Consultas con3=new Consultas();
-            
-            HttpSession objsesion=request.getSession();
-            Usuario usuario=con3.getUsuario(Nombre,Contraseña);
-            objsesion.setAttribute("usuario",usuario); 
-            
-            if(con.autenticacion(Nombre, Contraseña)){                               
-                //creo sesion
-                
-                objsesion.setAttribute("nombre", Nombre); 
-                objsesion.setAttribute("pass", Contraseña);
-                request.getSession().removeAttribute("error");
-                Personaje personaje=con2.getPersonaje(Nombre,Contraseña);
-                
-                out.println(personaje.id);
-                
-                if(personaje.id!=0){
-                    objsesion.setAttribute("personaje", personaje); 
-                    //request.setAttribute("personaje", personaje);
-                    //response.sendRedirect("Confirmation.jsp");
-                    //request.getRequestDispatcher("Confirmation.jsp").forward(request, response);
-                    response.sendRedirect("cargarUsuario");
-                }else{
-                    
-                    out.println(usuario.id);
-                    response.sendRedirect("cargar_personaje.jsp");
-                    //response.sendRedirect("crearPersonaje.jsp");
-                }
-                
-            }else{
-              
-               String mensaje="HAY UN ERROR EN EL INGRESO";
-               objsesion.setAttribute("error", mensaje); 
-               response.sendRedirect("errorLogin.jsp");
-            }
-
+        PrintWriter out = response.getWriter();
+        Consultas co=new Consultas();
+        ArrayList<Pokemon> lista_pokemon=co.cargarPokemonAll();
+        request.setAttribute("pokemones",lista_pokemon);
+        RequestDispatcher rd = request.getRequestDispatcher("/seleccionpkmn.jsp");
+        rd.forward(request, response);
+        
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
