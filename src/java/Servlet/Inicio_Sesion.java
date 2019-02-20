@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author WarPc
+ * @author JosheRamirez
  */
 public class Inicio_Sesion extends HttpServlet {
 
@@ -71,6 +71,8 @@ public class Inicio_Sesion extends HttpServlet {
                String mensaje="HAY UN ERROR EN EL INGRESO";
                objsesion.setAttribute("error", mensaje); 
                response.sendRedirect("errorLogin.jsp");
+
+
             }
 
     }
@@ -78,7 +80,7 @@ public class Inicio_Sesion extends HttpServlet {
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
+     * 
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
