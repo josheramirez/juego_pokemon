@@ -328,6 +328,35 @@ public class Consultas extends Connection_DB{
             }
             return lista_pokemon;
             }
+            
+            public void guardarPokemon(int pokemon_id, int personaje_id, String[] datos){
+                PreparedStatement pSta=null;
+                try{ 
+                    String Consulta="insert into pokedexs (fk_pokemon, fk_personaje, salud, estado) values (?, ?, (SELECT hp FROM pokemones WHERE id=?), ?)";
+                    pSta =getConnection_DB().prepareStatement(Consulta); 
+                    pSta.setInt(1, pokemon_id);
+                    pSta.setInt(2, personaje_id);
+                    pSta.setInt(3, pokemon_id);
+                    pSta.setInt(4, 1);
+
+                    if(pSta.executeUpdate()==1){
+                         System.out.println("ingresado");
+                    }
+                
+                }catch (Exception e){
+                    System.err.println("Error en conexion: "+e); 
+                }finally{
+                    try{
+                        if(getConnection_DB()!=null) 
+                            getConnection_DB().close();
+                        if(pSta !=null) 
+                            pSta.close();
+
+                    }catch(Exception e){
+                        System.out.println("Error en conexion: "+e);
+                    }                   
+                }
+            }
          
         public static void main(String[] args){
 
@@ -335,7 +364,9 @@ public class Consultas extends Connection_DB{
                //Personaje per=co.getPersonaje("joshe", "1234");
                //System.out.println(per.nombre);
                
-               System.out.println(co.cargarPokemonAll().size());
+            
+               //co.guardarPokemon(4, 1);
+               //System.out.println(co.cargarPokemonAll().size());
         }
          
 }

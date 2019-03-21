@@ -61,10 +61,11 @@ public class cargarUsuario extends HttpServlet {
             }
             
             Personaje personaje=C.cargarPersonaje(usuario.id);
-            ArrayList<Pokemon> lista_pokemon=C.cargarPokemons(usuario.id);
+            HS.setAttribute("personaje", personaje); 
+            //ArrayList<Pokemon> lista_pokemon=C.cargarPokemons(usuario.id);
           
-            request.setAttribute("personaje", personaje); 
-            request.setAttribute("personaje", personaje); 
+  
+            //request.setAttribute("personaje", personaje); 
         
         /*
         //mock
@@ -73,7 +74,7 @@ public class cargarUsuario extends HttpServlet {
         */
             
             
-            request.getRequestDispatcher("perfil.jsp").forward(request, response);
+            request.getRequestDispatcher("prueba").forward(request, response);
         } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

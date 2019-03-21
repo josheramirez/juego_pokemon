@@ -261,7 +261,7 @@ public class Consulta extends Connection_DB{
                 rs = PS.executeQuery();
   
                 if(rs.absolute(1)){
-    pokemons.imagen, pokemons.nombre, pokedexs.alias, pokemons.tipo, pokemons.especie, pokedexs.nivel, pokedexs.salud, pokedexs.id, pokedexs.estado, pokemons.id from pokedexs inner join personajes on pokedexs.fk_personaje = personajes.id               
+  //  pokemons.imagen, pokemons.nombre, pokedexs.alias, pokemons.tipo, pokemons.especie, pokedexs.nivel, pokedexs.salud, pokedexs.id, pokedexs.estado, pokemons.id from pokedexs inner join personajes on pokedexs.fk_personaje = personajes.id               
                     pokemon.id=rs.getInt("id");
                     pokemon.nombre=rs.getString("nombre");
                     pokemon.nivel=rs.getInt("nivel");

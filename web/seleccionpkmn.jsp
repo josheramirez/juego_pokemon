@@ -51,7 +51,14 @@
             <div class="pkbl"><img src="prev/pkball1.png" width="25px" heigth="25px" id="poke2" onmouseout="req2(this)" onclick="quitar(this)"/></div>
             <div class="pkbl"><img src="prev/pkball1.png" width="25px" heigth="25px" id="poke3" onmouseout="req3(this)" onclick="quitar(this)"/></div>
             
-            <div align="rigth"><button style="height:30px; width: 100px;" disabled="true" onload="des(this)"  id="btn" action="/pkmnsalida.java">Siguiente</button></div>
+            <div align="rigth">
+                <form action="crearPokemon">
+                    <input type="hidden" name="pokemones" id="lista_pokemones">
+                    <input type="submit" value="Siguiente" style="height:30px; width: 100px;" disabled="true" onload="des(this)"  id="btn"></button>
+                </form>
+                <!--<button style="height:30px; width: 100px;" disabled="true" onload="des(this)"  id="btn" action="/pkmnsalida.java">Siguiente</button>-->
+            
+            </div>
             <br><br><br>
 
             
@@ -62,7 +69,7 @@
        %>
        <img  src="<%=pokemon.imagen%>" border='10' height='100px' width='100px' 
                style='border-color:black' onmouseover='funcion(this)' onmouseout='func(this)' 
-               onclick='clic(this)' id="<%=pokemon.nombre%>"></img>
+               onclick='clic(this)' id="<%=pokemon.id%>"></img>
        <%
         id++;
             if(id%5==0 && id!=0){ 
@@ -117,6 +124,8 @@
                         }
                     function confbtn(){
                         if(conf===3){
+                           document.getElementById("lista_pokemones").value=pkmns;
+                          
                            document.getElementById("btn").disabled=false;
                         }else{document.getElementById("btn").disabled=true; }
                     }

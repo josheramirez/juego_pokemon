@@ -20,6 +20,10 @@
         <servlet-name>prueba</servlet-name>
         <servlet-class>Servlet.prueba</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>crearPokemon</servlet-name>
+        <servlet-class>Servlet.crearPokemon</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Inicio_Sesion</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>prueba</servlet-name>
         <url-pattern>/prueba</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>crearPokemon</servlet-name>
+        <url-pattern>/crearPokemon</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
